@@ -5,6 +5,12 @@ $sql = "SELECT * FROM clientes";
 $result = mysqli_query($conn, $sql);
 
 ?>
+
+<?php if(isset($_GET['msg']) && $_GET['msg'] === 'adicionado'):?>
+  <div style="padding:12px; background:rgb(215, 237, 212); color:rgb(32, 87, 21); border-radius:5px;">
+    Cliente cadastrado com sucesso!
+  </div>
+<?php endif;?>
 <!doctype html>
 <html>
 <head>
