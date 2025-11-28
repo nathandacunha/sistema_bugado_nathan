@@ -2,7 +2,7 @@
 require_once 'conexao.php';
 
 if (!isset($_GET['id'])) {
-    die('ID não informado');
+  die('ID não informado');
 }
 
 $id = $_GET['id'];
@@ -15,23 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf'];
 
-    // Verifica se o campo nome e o cpf estão vazios
-    if(empty($nome) || empty($cpf)){
-      die('Por favor, preencha todos os campos');
-    }
-    // verifica cpf
-    if(mysqli_error($conn)){
-      echo "Erro! Esse cpf já esta cadastrado";
-    } else {
-      // mensagem adicionado para a confirmação de url
-      header("Location: index.php?msg=editado");
-      exit;
-    }
 
     //mudei a ordem dos atributos da consulta sql
     $sql_update = "UPDATE clientes SET nome = '$nome', cpf = '$cpf'  WHERE id = $id"; 
     mysqli_query($conn, $sql_update);
-
     header('Location: index.php');
     exit;
 }

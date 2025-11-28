@@ -9,7 +9,7 @@ if (!isset($_GET['id'])) {
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(($_POST['resposta']) === 'sim'){
         // Coloquei aonde que query vai deletar, estava sem where, logo excluia todos os dados
-        $sql = "DELETE FROM clientes WHERE id = $id";
+        $sql = "DELETE FROM clientes WHERE id = ?";
         mysqli_query($conn, $sql);
 
         // mensagem adicionado para a confirmação da url
@@ -25,13 +25,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tem certeza?</title>
 </head>
-
 <body>
     <section class="card">
         <h1>Tem certeza que deseja excluir este cliente?</h1>
@@ -42,5 +40,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         </form>
     </section>
 </body>
-
 </html>

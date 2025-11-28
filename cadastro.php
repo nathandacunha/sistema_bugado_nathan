@@ -3,25 +3,36 @@ require_once 'conexao.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf']; // faltava um ;
+  $nome = $_POST['nome'];
+  $cpf = $_POST['cpf']; // faltava um ;
 
-    // verifica se campo nome e campo cpf estão vazios
-    if(empty($nome) || empty($cpf)){
-      die('Por favor, preencha todos os campos');
-    }
-    $sql = "INSERT INTO clientes (nome, cpf) VALUES ('$nome', '$cpf')";
-    mysqli_query($conn, $sql);
-    // verificacao de cpf
-    if(mysqli_error($conn)){
-      echo "Erro, o cpf já está cadastrado";
+  // verifica se campo nome e campo cpf estão vazios
+  if(empty($nome) || empty($cpf)){
+    die('Por favor, preencha todos os campos');
+  } else {
+    // verificacao se o cpf já existe
+    $sql_check = "SELECT id FROM clientes WHERE cpf = '" . mysqli_real_escape_string($conn, $cpf) . "'";
+    $result_check = mysqli_query($conn, $sql_check);
+
+    if(!$result_check){
+      $error = 'Erro na verificação de cpf: ' . mysqli_error($conn);
+      echo $error;
+    } else if(mysqli_num_rows($result_check) > 0){
+      $error = 'Este cpf já esta cadastrado';
+      echo $error;
     } else {
-      // Mensagem  adicionado para a confirmação de url  
-      header("Location: index.php?msg=adicionado");
-      exit;
+      // Consulta 
+      $sql = "INSERT INTO clientes (nome, cpf) VALUES ('" . mysqli_real_escape_string($conn, $nome) . "', '" . mysqli_real_escape_string($conn, $cpf) . "')";
+
+      if(mysqli_query($conn, $sql)){
+        header('Location: index.php');
+        exit;
+      } else {
+        $error = 'Erro ao cadastrar o cliente: ' . mysqli_error($conn);
+        echo $error;
+      }
     }
-    header('Location: index.php');
-    exit;
+  }
 }
 ?>
 <!doctype html>
