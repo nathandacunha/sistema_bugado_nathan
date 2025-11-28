@@ -18,7 +18,15 @@ $result = mysqli_query($conn, $sql);
     Cliente editado com sucesso!
   </div>
 <?php endif;?>
-<!doctype html>
+
+<!-- Mensagem que cliente foi excluido com sucesso-->
+<?php if(isset($_GET['msg']) && $_GET['msg'] === 'excluir'):?>
+  <div style="padding:12px; background:rgb(253, 156, 137); color:rgb(233, 22, 22); border-radius:5px;">
+    Cliente excluido com sucesso!
+  </div>
+<?php endif;?>
+
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
