@@ -4,7 +4,7 @@ USE manutencao;
 CREATE TABLE IF NOT EXISTS clientes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(100) NOT NULL,
-  cpf VARCHAR(14) NOT NULL
+  cpf VARCHAR(14) NOT NULL UNIQUE -- adicionei o unique para fazer validação de cpf
 );
 
 INSERT INTO clientes (nome, cpf) VALUES
