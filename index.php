@@ -5,10 +5,17 @@ $sql = "SELECT * FROM clientes";
 $result = mysqli_query($conn, $sql);
 
 ?>
-
+<!-- Mensagem que cliente foi adicionado com sucesso-->
 <?php if(isset($_GET['msg']) && $_GET['msg'] === 'adicionado'):?>
   <div style="padding:12px; background:rgb(215, 237, 212); color:rgb(32, 87, 21); border-radius:5px;">
     Cliente cadastrado com sucesso!
+  </div>
+<?php endif;?>
+
+<!-- Mensagem que cliente foi editado com sucesso-->
+<?php if(isset($_GET['msg']) && $_GET['msg'] === 'editado'):?>
+  <div style="padding:12px; background:rgb(230, 226, 193); color:rgb(196, 179, 34); border-radius:5px;">
+    Cliente editado com sucesso!
   </div>
 <?php endif;?>
 <!doctype html>

@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $cpf = $_POST['cpf']; // faltava um ;
 
+    // verifica se campo nome e campo cpf estão vazios
     if(empty($nome) || empty($cpf)){
       die('Por favor, preencha todos os campos');
     }
